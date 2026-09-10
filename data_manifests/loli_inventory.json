@@ -1,0 +1,937 @@
+{
+  "root": "/home/saman/Desktop/Computer Vision/My Project/LoLI-Street: Low-Light Image Enhancement of Street/LoLI-Street Dataset",
+  "exists": true,
+  "splits": {
+    "Train": {
+      "n_high": 30000,
+      "n_low": 30000,
+      "paired": true,
+      "only_in_high": [],
+      "only_in_low": [],
+      "sample_high": [
+        "dense_1.jpg",
+        "dense_10.jpg",
+        "dense_100.jpg"
+      ],
+      "sample_sizes_high": [
+        {
+          "file": "dense_1.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_10.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_100.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1000.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_10000.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1001.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1002.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1003.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1004.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1005.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1006.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1007.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1008.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1009.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_101.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1010.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1011.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1012.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1013.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1014.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "sample_sizes_low": [
+        {
+          "file": "dense_1.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_10.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_100.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1000.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_10000.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1001.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1002.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1003.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1004.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1005.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1006.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1007.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1008.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1009.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_101.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1010.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1011.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1012.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1013.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_1014.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        }
+      ]
+    },
+    "Val": {
+      "n_high": 3000,
+      "n_low": 3000,
+      "paired": true,
+      "only_in_high": [],
+      "only_in_low": [],
+      "sample_high": [
+        "dense_30001.jpg",
+        "dense_30002.jpg",
+        "dense_30003.jpg"
+      ],
+      "sample_sizes_high": [
+        {
+          "file": "dense_30001.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30002.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30003.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30004.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30005.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30006.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30007.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30008.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30009.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30010.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30011.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30012.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30013.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30014.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30015.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30016.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30017.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30018.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30019.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30020.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        }
+      ],
+      "sample_sizes_low": [
+        {
+          "file": "dense_30001.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30002.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30003.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30004.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30005.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30006.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30007.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30008.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30009.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30010.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30011.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30012.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30013.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30014.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30015.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30016.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30017.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30018.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30019.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        },
+        {
+          "file": "dense_30020.jpg",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGB"
+        }
+      ]
+    }
+  },
+  "test": {
+    "n": 1000,
+    "sample": [
+      "Test_1.jpg",
+      "Test_10.jpg",
+      "Test_100.jpg"
+    ],
+    "has_labels": false
+  },
+  "yolo": {
+    "train_high": {
+      "n_files": 30000,
+      "n_empty": 411,
+      "class_hist": {
+        "0": 53412,
+        "1": 1671,
+        "2": 171837,
+        "3": 2103,
+        "4": 138,
+        "5": 6255,
+        "6": 381,
+        "7": 17976,
+        "8": 9,
+        "9": 41391,
+        "10": 411,
+        "11": 549,
+        "12": 21,
+        "13": 321,
+        "14": 24,
+        "15": 9,
+        "16": 42,
+        "17": 39,
+        "20": 12,
+        "21": 3,
+        "23": 9,
+        "24": 441,
+        "25": 309,
+        "26": 399,
+        "28": 27,
+        "29": 18,
+        "32": 9,
+        "33": 156,
+        "36": 135,
+        "37": 15,
+        "38": 9,
+        "39": 48,
+        "45": 6,
+        "46": 9,
+        "52": 12,
+        "56": 39,
+        "58": 642,
+        "60": 3,
+        "61": 3,
+        "62": 9,
+        "67": 3,
+        "73": 6,
+        "74": 567
+      },
+      "errors": []
+    },
+    "train_low": {
+      "n_files": 30000,
+      "n_empty": 509,
+      "class_hist": {
+        "0": 44409,
+        "1": 1671,
+        "2": 153697,
+        "3": 1479,
+        "4": 120,
+        "5": 5731,
+        "6": 369,
+        "7": 16930,
+        "8": 11,
+        "9": 32226,
+        "10": 344,
+        "11": 394,
+        "12": 22,
+        "13": 337,
+        "14": 48,
+        "15": 1,
+        "16": 28,
+        "17": 37,
+        "23": 2,
+        "24": 357,
+        "25": 195,
+        "26": 317,
+        "28": 18,
+        "29": 10,
+        "32": 6,
+        "33": 103,
+        "36": 114,
+        "37": 1,
+        "38": 7,
+        "39": 17,
+        "45": 2,
+        "46": 6,
+        "52": 2,
+        "56": 18,
+        "58": 443,
+        "60": 1,
+        "61": 8,
+        "62": 11,
+        "67": 2,
+        "72": 1,
+        "73": 2,
+        "74": 424
+      },
+      "errors": []
+    },
+    "val_high": {
+      "n_files": 3000,
+      "n_empty": 18,
+      "class_hist": {
+        "0": 3957,
+        "1": 108,
+        "2": 15744,
+        "3": 2400,
+        "4": 9,
+        "5": 852,
+        "6": 33,
+        "7": 2043,
+        "8": 3,
+        "9": 1176,
+        "10": 24,
+        "11": 66,
+        "13": 12,
+        "24": 30,
+        "25": 15,
+        "26": 30,
+        "27": 6,
+        "32": 3,
+        "33": 12,
+        "38": 3,
+        "46": 3,
+        "56": 9,
+        "58": 48,
+        "62": 3,
+        "74": 63
+      },
+      "errors": []
+    },
+    "val_low": {
+      "n_files": 3000,
+      "n_empty": 19,
+      "class_hist": {
+        "0": 3382,
+        "1": 110,
+        "2": 14067,
+        "3": 1878,
+        "4": 8,
+        "5": 809,
+        "6": 52,
+        "7": 1950,
+        "8": 1,
+        "9": 866,
+        "10": 13,
+        "11": 24,
+        "13": 13,
+        "24": 21,
+        "25": 9,
+        "26": 9,
+        "27": 2,
+        "32": 1,
+        "33": 1,
+        "36": 1,
+        "38": 1,
+        "39": 1,
+        "46": 1,
+        "56": 7,
+        "58": 31,
+        "62": 1,
+        "63": 1,
+        "74": 44
+      },
+      "errors": []
+    }
+  },
+  "class_names": [
+    "person",
+    "bicycle",
+    "car",
+    "motorcycle",
+    "airplane",
+    "bus",
+    "train",
+    "truck",
+    "boat",
+    "traffic light",
+    "fire hydrant",
+    "stop sign",
+    "parking meter",
+    "bench",
+    "bird",
+    "cat",
+    "dog",
+    "horse",
+    "sheep",
+    "cow",
+    "elephant",
+    "bear",
+    "zebra",
+    "giraffe",
+    "backpack",
+    "umbrella",
+    "handbag",
+    "tie",
+    "suitcase",
+    "frisbee",
+    "skis",
+    "snowboard",
+    "sports ball",
+    "kite",
+    "baseball bat",
+    "baseball glove",
+    "skateboard",
+    "surfboard",
+    "tennis racket",
+    "bottle",
+    "wine glass",
+    "cup",
+    "fork",
+    "knife",
+    "spoon",
+    "bowl",
+    "banana",
+    "apple",
+    "sandwich",
+    "orange",
+    "broccoli",
+    "carrot",
+    "hot dog",
+    "pizza",
+    "donut",
+    "cake",
+    "chair",
+    "couch",
+    "potted plant",
+    "bed",
+    "dining table",
+    "toilet",
+    "tv",
+    "laptop",
+    "mouse",
+    "remote",
+    "keyboard",
+    "cell phone",
+    "microwave",
+    "oven",
+    "toaster",
+    "sink",
+    "refrigerator",
+    "book",
+    "clock",
+    "vase",
+    "scissors",
+    "teddy bear",
+    "hair drier",
+    "toothbrush"
+  ]
+}

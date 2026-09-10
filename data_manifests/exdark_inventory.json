@@ -1,0 +1,211 @@
+{
+  "root": "/home/saman/Desktop/Computer Vision/My Project/ExDarkDataset",
+  "exists": true,
+  "images": {
+    "n": 7363,
+    "by_ext": {
+      ".JPEG": 424,
+      ".JPG": 243,
+      ".jpeg": 5,
+      ".jpg": 6195,
+      ".png": 496
+    },
+    "sample": [
+      "2015_00001.png",
+      "2015_00002.png",
+      "2015_00003.png"
+    ],
+    "sample_sizes": [
+      {
+        "file": "2015_00001.png",
+        "size": [
+          500,
+          375
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00002.png",
+        "size": [
+          500,
+          341
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00003.png",
+        "size": [
+          500,
+          375
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00004.jpg",
+        "size": [
+          640,
+          360
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00005.jpg",
+        "size": [
+          500,
+          333
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00006.jpg",
+        "size": [
+          500,
+          375
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00007.jpg",
+        "size": [
+          500,
+          333
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00008.jpg",
+        "size": [
+          333,
+          500
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00009.jpg",
+        "size": [
+          500,
+          375
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00010.jpg",
+        "size": [
+          864,
+          576
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00011.jpg",
+        "size": [
+          1024,
+          768
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00012.jpg",
+        "size": [
+          1024,
+          768
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00013.jpg",
+        "size": [
+          1024,
+          768
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00014.jpg",
+        "size": [
+          767,
+          536
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00015.jpg",
+        "size": [
+          800,
+          800
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00016.jpg",
+        "size": [
+          640,
+          500
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00017.jpg",
+        "size": [
+          338,
+          505
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00018.jpg",
+        "size": [
+          335,
+          510
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00019.jpg",
+        "size": [
+          506,
+          338
+        ],
+        "mode": "RGB"
+      },
+      {
+        "file": "2015_00020.jpg",
+        "size": [
+          640,
+          363
+        ],
+        "mode": "RGB"
+      }
+    ]
+  },
+  "csv": {
+    "path": "/home/saman/Desktop/Computer Vision/My Project/ExDarkDataset/annotations.csv",
+    "exists": true,
+    "n_boxes": 23710,
+    "n_unique_images": 7362,
+    "class_hist": {
+      "0": 1120,
+      "1": 1389,
+      "2": 1593,
+      "3": 706,
+      "4": 2927,
+      "5": 909,
+      "6": 2377,
+      "7": 1656,
+      "8": 1018,
+      "9": 1072,
+      "10": 7460,
+      "11": 1483
+    },
+    "bad_coord_rows": 0,
+    "in_csv_missing_on_disk": [
+      "2015_00391.jpg"
+    ],
+    "on_disk_missing_in_csv": [
+      "2015_00391.JPG",
+      "2015_05894.jpg"
+    ],
+    "n_in_csv_missing_on_disk": 1,
+    "n_on_disk_missing_in_csv": 2
+  }
+}
