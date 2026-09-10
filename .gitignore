@@ -1,0 +1,42 @@
+# --- Project-private files (never pushed) ---
+CV_TA_Project_Proposal_v3.md
+planning_prompt*.md
+*PLAN_PROMPT*.md
+
+# --- Datasets (local only, too large for git) ---
+ExDarkDataset/
+LoLI-Street: Low-Light Image Enhancement of Street/
+data/
+datasets/
+
+# --- Model weights and checkpoints ---
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.tar
+checkpoints/
+weights/
+runs/
+lightning_logs/
+wandb/
+
+# --- Experiment outputs (regenerate from code) ---
+results/
+outputs/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
