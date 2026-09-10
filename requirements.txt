@@ -1,0 +1,18 @@
+# Runtime: ~/Desktop/Artificial Intelligence/AI (Python 3.12, venv, no --break-system-packages)
+# Install: "<venv>/bin/pip install -r requirements.txt"
+numpy
+pillow
+opencv-python-headless
+matplotlib
+seaborn
+pandas
+pyyaml
+tqdm
+scikit-learn
+scipy
+jupyter
+nbformat
+# Deep learning (GPU: NVIDIA RTX 4050 Laptop, 6GB)
+torch
+torchvision
+ultralytics
