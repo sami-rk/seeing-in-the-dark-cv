@@ -25,6 +25,17 @@ from paired.pix2pix import UNetGenerator
 from paired.vae import ConvVAE
 
 
+def load_cyclegan(weights: Path, dev: torch.device):
+    import sys as _sys
+
+    _sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from cyclegan.generators import ResNetGenerator
+
+    model = ResNetGenerator()
+    model.load_state_dict(torch.load(weights, map_location=dev, weights_only=True)["g_a2b"])
+    return model
+
+
 def load_model(name: str, weights: Path, dev: torch.device) -> tuple[torch.nn.Module, bool]:
     if name == "ae":
         model = ConvAE()
@@ -38,7 +49,40 @@ def load_model(name: str, weights: Path, dev: torch.device) -> tuple[torch.nn.Mo
         model = UNetGenerator()
         model.load_state_dict(torch.load(weights, map_location=dev, weights_only=True)["gen"])
         return model, True
+    if name == "cyclegan":
+        return load_cyclegan(weights, dev), True
     raise ValueError(f"unknown model {name!r}")
+
+
+def _to_input_tensor(path: Path, tanh_range: bool) -> torch.Tensor:
+    arr = np.array(Image.open(path).convert("RGB")).astype(np.float32) / 255.0
+    t = torch.from_numpy(arr).permute(2, 0, 1)
+    return t * 2 - 1 if tanh_range else t
+
+
+@torch.no_grad()
+def restore_exdark_native(model_name: str, weights: Path, img_dir: Path, out_dir: Path) -> int:
+    """Restore ExDark val images at native resolution (boxes stay aligned)."""
+    dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model, tanh_range = load_model(model_name, weights, dev)
+    model.to(dev).eval()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    n = 0
+    for img_path in sorted(img_dir.iterdir()):
+        if not img_path.is_file() or img_path.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
+            continue
+        t = _to_input_tensor(img_path, tanh_range).unsqueeze(0).to(dev)
+        out = model(t)
+        if isinstance(out, tuple):
+            out = out[0]
+        out = out.clamp(-1, 1) if tanh_range else out.clamp(0, 1)
+        if tanh_range:
+            out = (out + 1) / 2
+        arr = (out[0].cpu().permute(1, 2, 0).numpy() * 255).round().astype(np.uint8)
+        Image.fromarray(arr).save(out_dir / img_path.name)
+        n += 1
+    print(f"restored {n} ExDark images with {model_name}")
+    return n
 
 
 @torch.no_grad()
@@ -50,7 +94,15 @@ def main() -> None:
     parser.add_argument("--metrics", type=Path, default=None)
     parser.add_argument("--size", type=int, default=512)
     parser.add_argument("--batch", type=int, default=8)
+    parser.add_argument("--dataset", choices=["loli", "exdark"], default="loli")
+    parser.add_argument("--img-dir", type=Path, default=None,
+                        help="ExDark image dir (with --dataset exdark).")
     args = parser.parse_args()
+
+    if args.dataset == "exdark":
+        assert args.img_dir, "--img-dir is required with --dataset exdark"
+        restore_exdark_native(args.model, args.weights, args.img_dir, args.out)
+        return
 
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, tanh_range = load_model(args.model, args.weights, dev)
