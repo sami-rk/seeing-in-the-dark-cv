@@ -26,6 +26,7 @@ wandb/
 # --- Experiment outputs (regenerate from code) ---
 results/
 outputs/
+restored_*/
 
 # --- Python ---
 __pycache__/
