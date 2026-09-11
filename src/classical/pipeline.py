@@ -32,9 +32,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 LOLI_VAL = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset" / "Val"
 
 # FROZEN pipeline (chosen on full-val numbers, see results/classical.json).
-# equalize_freq: global equalization (best exposure match on LoLI pairs) +
-# frequency low-pass (best edge-preserving denoiser in step comparisons).
-FROZEN = "equalize_freq"
+# clahe_gamma_bilateral wins SSIM (0.829) and, decisively, the task metric:
+# zero-shot YOLOv8n mAP@0.5 on 300 val frames is 0.725 vs 0.690 for the
+# PSNR-best equalize (19.95 vs 17.37 PSNR). Pixel fidelity and detection
+# diverge here, and the detector's vote breaks the tie. Morphology stays out:
+# 3x3 opening drops PSNR 22.3 -> 19.5 on brightened frames.
+FROZEN = "clahe_gamma_bilateral"
 
 
 def restore(img, mode: str = FROZEN):
