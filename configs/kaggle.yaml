@@ -1,0 +1,33 @@
+# One-shot Kaggle run: fixed budgets for a single GPU session (~8h on a T4).
+# Every number below is exact -- no ranges. Override any stage with
+# `python kaggle_run.py --only <stage>` / `--skip <stage>`.
+seed: 42
+device: 0
+train_size: 256
+yolo_imgsz: 640
+
+stages:
+  # M0: manifests + overlap check (CPU)
+  inventory: true
+  # M1: exdark_yolo + loli_yolo layouts, zero-shot baselines yolov8n
+  baselines: true
+
+  classical:
+    full_val_compare: true   # 3000 pairs x 6 candidates (CPU ~25min)
+    restore_loli_val: true
+    restore_exdark: true     # full 7363, reused by every ExDark mAP cell
+
+  paired:
+    ae:      {epochs: 15, subset: 6000, batch: 16}
+    vae:     {epochs: 15, subset: 6000, batch: 16}
+    pix2pix: {epochs: 10, subset: null, batch: 8}   # full 30k, ~2.7h
+
+  cyclegan:
+    {epochs: 10, subset: 1500, batch: 1}            # ~2.3h
+
+  finetune:
+    loli:   {epochs: 8, batch: 32}    # 30k imgs, ~1h
+    exdark: {epochs: 15, batch: 32}   # 6.6k imgs, ~30min
+
+  # M5: restore all val sets with every method, score every master-table cell
+  master_table: true
