@@ -101,9 +101,14 @@ class PatchDiscriminator(nn.Module):
 
 def train_pix2pix(epochs: int = 20, subset: int = 6000, size: int = 256, batch: int = 8,
                   lr: float = 2e-4, lambda_l1: float = LAMBDA_L1, device: str = "cuda",
-                  out: Path | None = None) -> dict:
+                  out: Path | None = None, resume: Path | None = None) -> dict:
     dev = torch.device(device if torch.cuda.is_available() else "cpu")
     gen, disc = UNetGenerator().to(dev), PatchDiscriminator().to(dev)
+    if resume:
+        ckpt = torch.load(resume, map_location=dev, weights_only=True)
+        gen.load_state_dict(ckpt["gen"])
+        disc.load_state_dict(ckpt["disc"])
+        print(f"resumed from {resume}")
     opt_g = torch.optim.Adam(gen.parameters(), lr=lr, betas=(0.5, 0.999))
     opt_d = torch.optim.Adam(disc.parameters(), lr=lr, betas=(0.5, 0.999))
     bce, l1 = nn.BCEWithLogitsLoss(), nn.L1Loss()
