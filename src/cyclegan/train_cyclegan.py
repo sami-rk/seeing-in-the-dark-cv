@@ -13,6 +13,7 @@ Run a smoke epoch:
     <venv>/bin/python src/cyclegan/train_cyclegan.py --epochs 1 --subset 32
 """
 import argparse
+import json
 import random
 import sys
 from pathlib import Path
@@ -120,9 +121,14 @@ def main() -> None:
     parser.add_argument("--size", type=int, default=256)
     parser.add_argument("--batch", type=int, default=1)
     parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--history", type=Path, default=None)
     args = parser.parse_args()
     subset = None if args.subset <= 0 else args.subset
-    train_cyclegan(args.epochs, subset, args.size, args.batch, out=args.out)
+    history = train_cyclegan(args.epochs, subset, args.size, args.batch, out=args.out)
+    if args.history:
+        args.history.parent.mkdir(parents=True, exist_ok=True)
+        args.history.write_text(__import__("json").dumps(history))
+        print(f"history saved to {args.history}")
 
 
 if __name__ == "__main__":

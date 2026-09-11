@@ -154,6 +154,7 @@ if __name__ == "__main__":
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--resume", type=Path, default=None)
     parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--history", type=Path, default=None)
     args = parser.parse_args()
 
     if args.smoke:
@@ -166,4 +167,8 @@ if __name__ == "__main__":
         train_pix2pix(epochs=1, subset=200, batch=4)
     else:
         subset = None if args.subset is not None and args.subset <= 0 else args.subset
-        train_pix2pix(args.epochs, subset, args.size, args.batch, out=args.out, resume=args.resume)
+        history = train_pix2pix(args.epochs, subset, args.size, args.batch, out=args.out, resume=args.resume)
+        if args.history:
+            args.history.parent.mkdir(parents=True, exist_ok=True)
+            args.history.write_text(__import__("json").dumps(history))
+            print(f"history saved to {args.history}")

@@ -109,6 +109,7 @@ if __name__ == "__main__":
     parser.add_argument("--beta", type=float, default=1e-3)
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--history", type=Path, default=None)
     args = parser.parse_args()
 
     if args.smoke:
@@ -119,4 +120,8 @@ if __name__ == "__main__":
         print("forward:", tuple(y.shape), tuple(mu.shape), float(y.min()), float(y.max()))
         train_vae(epochs=1, subset=200, batch=8)
     else:
-        train_vae(args.epochs, args.subset, args.size, args.batch, args.lr, args.beta, out=args.out)
+        history = train_vae(args.epochs, args.subset, args.size, args.batch, args.lr, args.beta, out=args.out)
+        if args.history:
+            args.history.parent.mkdir(parents=True, exist_ok=True)
+            args.history.write_text(__import__("json").dumps(history))
+            print(f"history saved to {args.history}")
