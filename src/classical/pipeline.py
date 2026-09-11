@@ -19,9 +19,9 @@ import sys
 from pathlib import Path
 
 import cv2
+import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-from classical.clahe_gamma import adaptive_gamma, apply_clahe, equalize_hist_luminance  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))from classical.clahe_gamma import adaptive_gamma, apply_clahe, equalize_hist_luminance  # noqa: E402
 from classical.denoise_frequency import denoise_frequency  # noqa: E402
 from classical.denoise_spatial import denoise_bilateral  # noqa: E402
 from classical.retinex import single_scale_retinex  # noqa: E402
@@ -67,8 +67,14 @@ def compare(limit: int | None = None) -> dict:
             high = cv2.imread(str(LOLI_VAL / "high" / name.name))
             for k, v in all_metrics(out, high).items():
                 acc.setdefault(k, []).append(v)
-        results[mode] = {k: float(sum(v) / len(v)) for k, v in acc.items()}
-        print(f"{mode:22s} " + " ".join(f"{k}={v:.3f}" for k, v in results[mode].items()), flush=True)
+        summary = {}
+        for k, v in acc.items():
+            finite = [x for x in v if np.isfinite(x)]
+            summary[k] = float(sum(finite) / len(finite)) if finite else float("inf")
+        summary["n_pairs"] = len(names)
+        summary["n_inf_psnr"] = len(acc["psnr"]) - len([x for x in acc["psnr"] if np.isfinite(x)])
+        results[mode] = summary
+        print(f"{mode:22s} " + " ".join(f"{k}={v:.3f}" for k, v in results[mode].items() if k != "n_inf_psnr"), flush=True)
     return results
 
 
