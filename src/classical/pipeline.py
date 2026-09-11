@@ -21,7 +21,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))from classical.clahe_gamma import adaptive_gamma, apply_clahe, equalize_hist_luminance  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from classical.clahe_gamma import adaptive_gamma, apply_clahe, equalize_hist_luminance  # noqa: E402
 from classical.denoise_frequency import denoise_frequency  # noqa: E402
 from classical.denoise_spatial import denoise_bilateral  # noqa: E402
 from classical.retinex import single_scale_retinex  # noqa: E402
