@@ -79,7 +79,7 @@ def restore_exdark_native(model_name: str, weights: Path, img_dir: Path, out_dir
         if tanh_range:
             out = (out + 1) / 2
         arr = (out[0].cpu().permute(1, 2, 0).numpy() * 255).round().astype(np.uint8)
-        Image.fromarray(arr).save(out_dir / img_path.name)
+        Image.fromarray(arr).save(out_dir / (img_path.stem + ".jpg"), quality=95)
         n += 1
     print(f"restored {n} ExDark images with {model_name}")
     return n
@@ -126,7 +126,7 @@ def main() -> None:
             high = (high + 1) / 2
         for j in range(len(low)):
             arr = (out[j].cpu().permute(1, 2, 0).numpy() * 255).round().astype(np.uint8)
-            Image.fromarray(arr).save(args.out / (Path(names[idx]).stem + ".png"))
+            Image.fromarray(arr).save(args.out / (Path(names[idx]).stem + ".jpg"), quality=95)
             ref = (high[j].permute(1, 2, 0).numpy() * 255).round().astype(np.uint8)
             for k, v in all_metrics(arr, ref).items():
                 if np.isfinite(v):

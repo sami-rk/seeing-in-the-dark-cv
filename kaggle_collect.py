@@ -81,13 +81,22 @@ def save_grids() -> None:
     out.mkdir(parents=True, exist_ok=True)
     loli_val = loli_root() / "Val"
     stems = sorted(p.stem for p in (loli_val / "low").glob("*.jpg"))[:3]
+
+    def resolve_loli(path: Path) -> Path:
+        if path.exists():
+            return path
+        for ext in (".jpg", ".png", ".jpeg"):
+            if path.with_suffix(ext).exists():
+                return path.with_suffix(ext)
+        return path
+
     cols = [("low", lambda s: loli_val / "low" / f"{s}.jpg"),
             ("high", lambda s: loli_val / "high" / f"{s}.jpg"),
             ("classical", lambda s: REPO / "restored_classical" / "loli_val" / f"{s}.png"),
             ("ae", lambda s: REPO / "restored_ae" / "loli_val" / f"{s}.png"),
             ("vae", lambda s: REPO / "restored_vae" / "loli_val" / f"{s}.png"),
             ("pix2pix", lambda s: REPO / "restored_pix2pix" / "loli_val" / f"{s}.png")]
-    rows = [[_thumb(fn(s)) for _, fn in cols] for s in stems]
+    rows = [[_thumb(resolve_loli(fn(s))) for _, fn in cols] for s in stems]
     w = max(sum(im.width for im in r) for r in rows)
     canvas = Image.new("RGB", (w, 256 * len(rows)), (20, 20, 20))
     for i, r in enumerate(rows):

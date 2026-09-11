@@ -87,12 +87,18 @@ def restore_folder(src_dir: Path, dst_dir: Path, mode: str = FROZEN) -> int:
     dst_dir.mkdir(parents=True, exist_ok=True)
     n = 0
     for img_path in sorted(src_dir.iterdir()):
-        if not img_path.is_file() or img_path.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
+        if not img_path.is_file() or img_path.suffix.lower() not in {
+            ".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff",
+        }:
             continue
         img = cv2.imread(str(img_path))
         if img is None:
             continue
-        cv2.imwrite(str(dst_dir / (img_path.stem + ".png")), restore(img, mode))
+        # JPEG-95: ~5x smaller than PNG at visually identical quality, so the
+        # full restored sets fit Kaggle's working disk. Applied uniformly to
+        # every method, so no comparison is biased.
+        cv2.imwrite(str(dst_dir / (img_path.stem + ".jpg")), restore(img, mode),
+                    [cv2.IMWRITE_JPEG_QUALITY, 95])
         n += 1
     return n
 
