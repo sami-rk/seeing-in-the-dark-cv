@@ -1,0 +1,3 @@
+# Kaggle already ships torch/torchvision, numpy, pillow, opencv, matplotlib,
+# pandas, scikit-learn, tqdm, pyyaml, jupyter. Only the detector stack is missing.
+ultralytics
