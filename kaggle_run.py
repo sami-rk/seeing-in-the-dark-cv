@@ -64,6 +64,11 @@ def main() -> None:
     active = [s for s in STAGES if s in only and s not in skip]
     print("stages:", active, flush=True)
 
+    sys.path.insert(0, str(SRC))
+    from data_roots import describe
+
+    print(json.dumps(describe(), indent=2), flush=True)
+
     PY = sys.executable
     dev = str(cfg.get("device", 0))
     size = cfg.get("train_size", 256)

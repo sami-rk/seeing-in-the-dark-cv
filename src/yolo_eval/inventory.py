@@ -62,7 +62,8 @@ def _parse_yolo_labels(label_dir: Path):
 
 
 def inventory_loli(root: Path) -> dict:
-    out: dict = {"root": str(root), "exists": root.exists(), "splits": {}}
+    out: dict = {"root": str(root), "exists": root.exists(), "splits": {},
+                 "test": {"n": 0, "sample": [], "has_labels": False}, "yolo": {}}
     if not root.exists():
         return out
     for split in ("Train", "Val"):
@@ -153,13 +154,23 @@ def main() -> None:
     args = parser.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
+    from data_roots import describe
+
+    print(json.dumps(describe(), indent=2), flush=True)
     loli = inventory_loli(args.loli)
     exdark = inventory_exdark(args.exdark)
     (args.out / "loli_inventory.json").write_text(json.dumps(loli, indent=2))
     (args.out / "exdark_inventory.json").write_text(json.dumps(exdark, indent=2))
     print(f"LoLI-Street splits: { {k: (v['n_high'], v['n_low'], v['paired']) for k, v in loli['splits'].items()} }")
     print(f"LoLI-Street test: {loli['test']['n']} images, labels: {loli['test']['has_labels']}")
-    print(f"ExDark images: {exdark['images']['n']}, boxes: {exdark['csv'].get('n_boxes')}")
+    print(f"ExDark images: {exdark.get('images', {}).get('n')}, boxes: {exdark.get('csv', {}).get('n_boxes')}")
+    missing = [k for k, v in (("LoLI-Street", loli), ("ExDark", exdark)) if not v["exists"]]
+    if missing:
+        raise SystemExit(
+            f"ERROR: dataset root(s) not found: {missing}. "
+            "Set LOLI_ROOT/EXDARK_ROOT env vars to the inner dataset folders "
+            "(LoLI: dir containing Train/Val; ExDark: dir containing annotations.csv) and re-run."
+        )
 
 
 if __name__ == "__main__":
