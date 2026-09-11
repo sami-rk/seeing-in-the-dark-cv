@@ -66,7 +66,10 @@ def main() -> None:
     acc: dict[str, list[float]] = {}
     idx = 0
     for low, high in loader:
-        out = model(low.to(dev)).clamp(0, 1)
+        out = model(low.to(dev))
+        if isinstance(out, tuple):  # VAE returns (recon, mu, logvar)
+            out = out[0]
+        out = out.clamp(0, 1)
         if tanh_range:
             out = (out + 1) / 2
             high = (high + 1) / 2
