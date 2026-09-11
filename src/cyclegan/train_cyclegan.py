@@ -25,10 +25,11 @@ from torch.utils.data import DataLoader, Dataset
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from cyclegan.discriminators import FakePool, PatchDiscriminator
 from cyclegan.generators import ResNetGenerator
+from data_roots import exdark_root, loli_root
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-EXDARK_IMGS = REPO_ROOT / "ExDarkDataset" / "Dataset" / "Dataset"
-LOLI_HIGH = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset" / "Train" / "high"
+EXDARK_IMGS = exdark_root() / "Dataset" / "Dataset"
+LOLI_HIGH = loli_root() / "Train" / "high"
 
 LAMBDA_CYCLE = 10.0
 LAMBDA_ID = 5.0

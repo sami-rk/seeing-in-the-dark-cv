@@ -21,7 +21,6 @@ from torch.utils.data import DataLoader
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from metrics.psnr_ssim import all_metrics
 from paired.autoencoder import ConvAE
-from paired.datasets import LOLI_ROOT
 from paired.pix2pix import UNetGenerator
 from paired.vae import ConvVAE
 

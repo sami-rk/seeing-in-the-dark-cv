@@ -12,8 +12,13 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from data_roots import loli_root
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-LOLI_ROOT = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset"
+LOLI_ROOT = loli_root()
 
 
 def _load_rgb(path: Path, size: int) -> torch.Tensor:

@@ -17,11 +17,15 @@ import argparse
 import csv
 import json
 import random
+import sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from data_roots import exdark_root
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-EXDARK_ROOT = REPO_ROOT / "ExDarkDataset"
+EXDARK_ROOT = exdark_root()
 OVERLAP_MAP = REPO_ROOT / "data_manifests" / "overlap_map.json"
 
 VAL_FRACTION = 0.10

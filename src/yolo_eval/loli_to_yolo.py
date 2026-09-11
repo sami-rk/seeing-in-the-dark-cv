@@ -13,10 +13,14 @@ Run from repo root:
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from data_roots import loli_root
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-LOLI_ROOT = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset"
+LOLI_ROOT = loli_root()
 
 def _link(src: Path, dst: Path) -> None:
     if dst.is_symlink() or dst.exists():

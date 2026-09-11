@@ -10,12 +10,16 @@ Both datasets must already be present locally; nothing is downloaded.
 import argparse
 import csv
 import json
+import sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from data_roots import exdark_root, loli_root
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-LOLI_ROOT = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset"
-EXDARK_ROOT = REPO_ROOT / "ExDarkDataset"
+LOLI_ROOT = loli_root()
+EXDARK_ROOT = exdark_root()
 MANIFEST_DIR = REPO_ROOT / "data_manifests"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}

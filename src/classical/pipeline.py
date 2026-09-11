@@ -22,6 +22,7 @@ import cv2
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from data_roots import loli_root
 from classical.clahe_gamma import adaptive_gamma, apply_clahe, equalize_hist_luminance  # noqa: E402
 from classical.denoise_frequency import denoise_frequency  # noqa: E402
 from classical.denoise_spatial import denoise_bilateral  # noqa: E402
@@ -29,7 +30,7 @@ from classical.retinex import single_scale_retinex  # noqa: E402
 from metrics.psnr_ssim import all_metrics  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-LOLI_VAL = REPO_ROOT / "LoLI-Street: Low-Light Image Enhancement of Street" / "LoLI-Street Dataset" / "Val"
+LOLI_VAL = loli_root() / "Val"
 
 # FROZEN pipeline (chosen on full-val numbers, see results/classical.json).
 # clahe_gamma_bilateral wins SSIM (0.829) and, decisively, the task metric:
