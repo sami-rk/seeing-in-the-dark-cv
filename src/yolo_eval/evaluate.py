@@ -14,6 +14,24 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+# Standard COCO-80 names in id order. The remapped ExDark yaml must declare all
+# 80: labels carry COCO ids (up to 60), and ultralytics drops every image with
+# a label id >= nc, so a 12-class yaml silently evaluates a biased subset.
+COCO80 = [
+    "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck",
+    "boat", "traffic light", "fire hydrant", "stop sign", "parking meter", "bench",
+    "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra",
+    "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+    "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove",
+    "skateboard", "surfboard", "tennis racket", "bottle", "wine glass", "cup",
+    "fork", "knife", "spoon", "bowl", "banana", "apple", "sandwich", "orange",
+    "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
+    "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse",
+    "remote", "keyboard", "cell phone", "microwave", "oven", "toaster", "sink",
+    "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
+    "hair drier", "toothbrush",
+]
+
 
 def load_overlap_map(path: Path | None = None) -> dict:
     path = path or REPO_ROOT / "data_manifests" / "overlap_map.json"
@@ -53,9 +71,16 @@ def remap_exdark_labels_to_coco(build_dir: Path, overlap: dict) -> Path:
         (lbl_dst / (img.stem + ".txt")).write_text("\n".join(lines) + "\n" if lines else "")
     base = (build_dir / "exdark.yaml").read_text().splitlines()
     yaml_path = build_dir / "exdark_coco.yaml"
-    yaml_path.write_text(
-        "\n".join(ln if not ln.startswith("val:") else "val: images/val_coco" for ln in base) + "\n"
-    )
+    names = json.dumps({i: n for i, n in enumerate(COCO80)})
+    lines = []
+    for ln in base:
+        if ln.startswith("val:"):
+            lines.append("val: images/val_coco")
+        elif ln.startswith("names:"):
+            lines.append(f"names: {names}")
+        else:
+            lines.append(ln)
+    yaml_path.write_text("\n".join(lines) + "\n")
     return yaml_path
 
 
