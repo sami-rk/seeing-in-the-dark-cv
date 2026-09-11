@@ -42,9 +42,12 @@ def remap_exdark_labels_to_coco(build_dir: Path, overlap: dict) -> Path:
     """Write a shadow val set whose GT ids are COCO ids; return its yaml path.
 
     Ultralytics derives each label path from its image path (``images/`` ->
-    ``labels/``), so both trees are mirrored: images are symlinked, labels
-    are rewritten with COCO ids.
+    ``labels/``), so both trees are mirrored: images are COPIED (not symlinked,
+    because ultralytics rewrites EXIF-rotated images in place and the Kaggle
+    input mount is read-only), labels are rewritten with COCO ids.
     """
+    import shutil
+
     build_dir = Path(build_dir)
     name_to_coco = overlap["exdark_name_to_coco_id"]
     id_to_name = overlap["exdark_csv_id_to_name"]
@@ -56,10 +59,10 @@ def remap_exdark_labels_to_coco(build_dir: Path, overlap: dict) -> Path:
     img_dst.mkdir(parents=True, exist_ok=True)
     lbl_dst.mkdir(parents=True, exist_ok=True)
     for img in sorted(img_src.iterdir()):
-        link = img_dst / img.name
-        if link.is_symlink() or link.exists():
-            link.unlink()
-        link.symlink_to(img.resolve())
+        dst = img_dst / img.name
+        if dst.exists() or dst.is_symlink():
+            dst.unlink()
+        shutil.copy2(img.resolve(), dst)
         src = lbl_src / (img.stem + ".txt")
         lines = []
         if src.exists():
