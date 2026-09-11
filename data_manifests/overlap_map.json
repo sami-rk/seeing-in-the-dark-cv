@@ -1,0 +1,36 @@
+{
+  "exdark_csv_id_to_name": {
+    "0": "Bicycle",
+    "1": "Boat",
+    "2": "Bottle",
+    "3": "Bus",
+    "4": "Car",
+    "5": "Cat",
+    "6": "Chair",
+    "7": "Cup",
+    "8": "Dog",
+    "9": "Motorbike",
+    "10": "People",
+    "11": "Table"
+  },
+  "exdark_name_to_coco_id": {
+    "Bicycle": 1,
+    "Boat": 8,
+    "Bottle": 39,
+    "Bus": 5,
+    "Car": 2,
+    "Cat": 15,
+    "Chair": 56,
+    "Cup": 41,
+    "Dog": 16,
+    "Motorbike": 3,
+    "People": 0,
+    "Table": 60
+  },
+  "notes": [
+    "ExDark CSV ids are alphabetical (Bicycle=0 .. Table=11), matching the Roboflow/HF YOLO export order.",
+    "Verified by identical per-image category sets on sampled images and by Bus (id 3) being the rarest class, as published.",
+    "All 12 ExDark classes exist in COCO-80, so zero-shot COCO-detector comparison covers all 12; Table maps to COCO dining-table (60).",
+    "LoLI-Street labels already use COCO 0-79 ids directly (see loli_inventory.json class_names)."
+  ]
+}
