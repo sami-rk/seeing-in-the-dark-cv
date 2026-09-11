@@ -13,6 +13,7 @@ scipy
 jupyter
 nbformat
 # Deep learning (GPU: NVIDIA RTX 4050 Laptop, 6GB)
+# Verified 2026-09-11: torch 2.14.0+cu130, torchvision 0.29.0+cu130, ultralytics 8.4.146
 torch
 torchvision
 ultralytics
