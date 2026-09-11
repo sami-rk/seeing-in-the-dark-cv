@@ -65,9 +65,11 @@ def evaluate(weights: str, data: str, split: str = "val", device=0, imgsz: int =
     model = YOLO(weights)
     metrics = model.val(data=data, split=split, verbose=False, device=device, imgsz=imgsz, plots=False, save_json=False)
     box = metrics.box
+    # NOTE: box.ap / box.ap50 pair with box.ap_class_index (seen classes only).
+    # box.maps is length nc with unseen classes filled by the mean -- do NOT zip it.
     per_class = {
-        str(int(c)): {"ap50": float(a), "ap": float(m)}
-        for c, a, m in zip(box.ap_class_index, box.ap50, box.maps)
+        str(int(c)): {"ap50": float(a50), "ap": float(a)}
+        for c, a50, a in zip(box.ap_class_index, box.ap50, box.ap)
     }
     return {
         "weights": str(weights),
