@@ -115,12 +115,14 @@ def train_cyclegan(epochs: int = 20, subset: int = 2000, size: int = 256, batch:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train CycleGAN ExDark <-> LoLI-Street high.")
     parser.add_argument("--epochs", type=int, default=20)
-    parser.add_argument("--subset", type=int, default=2000)
+    parser.add_argument("--subset", type=int, default=2000,
+                        help="Images per domain; <=0 means all.")
     parser.add_argument("--size", type=int, default=256)
     parser.add_argument("--batch", type=int, default=1)
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
-    train_cyclegan(args.epochs, args.subset, args.size, args.batch, out=args.out)
+    subset = None if args.subset <= 0 else args.subset
+    train_cyclegan(args.epochs, subset, args.size, args.batch, out=args.out)
 
 
 if __name__ == "__main__":

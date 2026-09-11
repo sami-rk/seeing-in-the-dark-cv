@@ -76,9 +76,24 @@ def train_ae(epochs: int = 10, subset: int = 6000, size: int = 256, batch: int =
 
 
 if __name__ == "__main__":
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
-    m = ConvAE().to(dev).eval()
-    with torch.no_grad():
-        y = m(torch.zeros(2, 3, 256, 256, device=dev))
-    print("forward:", tuple(y.shape), float(y.min()), float(y.max()))
-    train_ae(epochs=1, subset=200, batch=8)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Train convolutional AE on LoLI-Street pairs.")
+    parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--subset", type=int, default=6000)
+    parser.add_argument("--size", type=int, default=256)
+    parser.add_argument("--batch", type=int, default=16)
+    parser.add_argument("--lr", type=float, default=2e-4)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--out", type=Path, default=None)
+    args = parser.parse_args()
+
+    if args.smoke:
+        dev = "cuda" if torch.cuda.is_available() else "cpu"
+        m = ConvAE().to(dev).eval()
+        with torch.no_grad():
+            y = m(torch.zeros(2, 3, 256, 256, device=dev))
+        print("forward:", tuple(y.shape), float(y.min()), float(y.max()))
+        train_ae(epochs=1, subset=200, batch=8)
+    else:
+        train_ae(args.epochs, args.subset, args.size, args.batch, args.lr, out=args.out)

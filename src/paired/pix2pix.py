@@ -144,10 +144,26 @@ def train_pix2pix(epochs: int = 20, subset: int = 6000, size: int = 256, batch: 
 
 
 if __name__ == "__main__":
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
-    g, d = UNetGenerator().to(dev).eval(), PatchDiscriminator().to(dev).eval()
-    with torch.no_grad():
-        x = torch.zeros(1, 3, 256, 256, device=dev)
-        f = g(x)
-        print("gen:", tuple(f.shape), float(f.min()), float(f.max()), "| disc:", tuple(d(x, f).shape))
-    train_pix2pix(epochs=1, subset=200, batch=4)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Train pix2pix cGAN on LoLI-Street pairs.")
+    parser.add_argument("--epochs", type=int, default=20)
+    parser.add_argument("--subset", type=int, default=6000)
+    parser.add_argument("--size", type=int, default=256)
+    parser.add_argument("--batch", type=int, default=8)
+    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--resume", type=Path, default=None)
+    parser.add_argument("--out", type=Path, default=None)
+    args = parser.parse_args()
+
+    if args.smoke:
+        dev = "cuda" if torch.cuda.is_available() else "cpu"
+        g, d = UNetGenerator().to(dev).eval(), PatchDiscriminator().to(dev).eval()
+        with torch.no_grad():
+            x = torch.zeros(1, 3, 256, 256, device=dev)
+            f = g(x)
+            print("gen:", tuple(f.shape), float(f.min()), float(f.max()), "| disc:", tuple(d(x, f).shape))
+        train_pix2pix(epochs=1, subset=200, batch=4)
+    else:
+        subset = None if args.subset is not None and args.subset <= 0 else args.subset
+        train_pix2pix(args.epochs, subset, args.size, args.batch, out=args.out, resume=args.resume)
