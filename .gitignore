@@ -6,6 +6,8 @@ planning_prompt*.md
 # --- Datasets (local only, too large for git) ---
 ExDarkDataset/
 LoLI-Street: Low-Light Image Enhancement of Street/
+exdark_yolo/
+loli_yolo/
 data/
 datasets/
 
