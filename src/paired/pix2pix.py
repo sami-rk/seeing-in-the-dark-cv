@@ -40,7 +40,16 @@ class _Up(nn.Module):
         self.block = nn.Sequential(*layers)
 
     def forward(self, x, skip):
-        return torch.cat([self.block(x), skip], dim=1)
+        x = self.block(x)
+        # ExDark inference uses native resolutions (not all divisible by 256),
+        # so skip and upsampled sizes can differ by 1px per level. Crop the
+        # larger to the smaller to keep skip connections valid.
+        if x.shape[2:] != skip.shape[2:]:
+            h = min(x.shape[2], skip.shape[2])
+            w = min(x.shape[3], skip.shape[3])
+            x = x[:, :, :h, :w]
+            skip = skip[:, :, :h, :w]
+        return torch.cat([x, skip], dim=1)
 
 
 class UNetGenerator(nn.Module):

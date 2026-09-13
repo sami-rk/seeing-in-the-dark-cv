@@ -62,7 +62,12 @@ def _to_input_tensor(path: Path, tanh_range: bool) -> torch.Tensor:
 
 @torch.no_grad()
 def restore_exdark_native(model_name: str, weights: Path, img_dir: Path, out_dir: Path) -> int:
-    """Restore ExDark val images at native resolution (boxes stay aligned)."""
+    """Restore ExDark val images at native resolution (boxes stay aligned).
+
+    Pix2pix's U-Net downsamples 256x (8 strides of 2). Native ExDark frames
+    have arbitrary sizes, so we pad each input to the next multiple of 256,
+    run the model, then crop the output back to the original size.
+    """
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, tanh_range = load_model(model_name, weights, dev)
     model.to(dev).eval()
@@ -71,13 +76,23 @@ def restore_exdark_native(model_name: str, weights: Path, img_dir: Path, out_dir
     for img_path in sorted(img_dir.iterdir()):
         if not img_path.is_file() or img_path.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
             continue
+        orig = Image.open(img_path).convert("RGB")
+        orig_w, orig_h = orig.size
         t = _to_input_tensor(img_path, tanh_range).unsqueeze(0).to(dev)
+        _, _, h, w = t.shape
+        pad_h = (256 - h % 256) % 256
+        pad_w = (256 - w % 256) % 256
+        if pad_h or pad_w:
+            t = torch.nn.functional.pad(t, (0, pad_w, 0, pad_h), mode="reflect")
         out = model(t)
         if isinstance(out, tuple):
             out = out[0]
         out = out.clamp(-1, 1) if tanh_range else out.clamp(0, 1)
         if tanh_range:
             out = (out + 1) / 2
+        # Crop back to original size if we padded for the U-Net
+        if pad_h or pad_w:
+            out = out[:, :, :h, :w]
         arr = (out[0].cpu().permute(1, 2, 0).numpy() * 255).round().astype(np.uint8)
         Image.fromarray(arr).save(out_dir / (img_path.stem + ".jpg"), quality=95)
         n += 1
